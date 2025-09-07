@@ -13,7 +13,7 @@ function calc(expression: string): void {
 
     let answer = handleOperands(operands)
 
-    if (operands.length === 0) {
+    if (operands.length === 0 || typeof(answer) === 'string') {
         console.log(answer)
     } else {
         console.log("Too much parameters!")
@@ -28,7 +28,7 @@ function calc(expression: string): void {
                 return 'Invalid expression!'
             }
         }
-        let operation: string = operandsList[0]!!
+        const operation: string = operandsList[0]!!
 
         operandsList.splice(0, 1)
 
@@ -41,6 +41,17 @@ function calc(expression: string): void {
             if (typeof(operandOne) === 'string') {
                 return operandOne
             }
+        } else if (operandsList[0]!!.substring(0, 1) === '(') {
+            const thisExpression: string = operandsList[0]!!.substring(1, operandsList[0]!!.length - 1)
+
+            let newOperands: string[] = splitWithoutBrackets(thisExpression)
+            operandOne = handleOperands(newOperands)
+
+            if (typeof(operandOne) === 'string') {
+                return operandOne
+            }
+
+            operandsList.splice(0, 1)
         } else if (!isNumeric(operandsList[0]!!)) {
             return "Invalid expression!"
         } else {
@@ -55,6 +66,17 @@ function calc(expression: string): void {
             if (typeof(operandTwo) === "string") {
                 return operandTwo
             }
+        } else if (operandsList[0]!!.substring(0, 1) === "(") {
+            const thisExpression = operandsList[0]!!.substring(1, operandsList[0]!!.length - 1)
+
+            let newOperands: string[] = splitWithoutBrackets(thisExpression)
+            operandTwo = handleOperands(newOperands)
+
+            if (typeof(operandTwo) === 'string') {
+                return operandTwo
+            }
+
+            operandsList.splice(0, 1)
         } else if (!isNumeric(operandsList[0]!!)) {
             return 'Invalid expression!'
         } else {
@@ -160,4 +182,4 @@ function calc(expression: string): void {
     }
 }
 
-calc('/ - 40 8 + - 5 * 1 4 / 9 3 ')
+calc('- * / 15 - 7 + 1 1 (* (- 8 7) (/ (* 3 5) 5)) + 2 + (* -1 -1) 1')
