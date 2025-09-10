@@ -1,4 +1,4 @@
-import { Presentation, Slide, SlideCollection } from "../types.js"
+import { Presentation, Selection, Slide, SlideCollection } from "../types.js"
 
 function renamePresentation(presentation: Presentation, newName: string): Presentation {
     return {
@@ -16,12 +16,24 @@ function addSlideToPresentation(presentation: Presentation, slide: Slide): Prese
     }
 }
 
-function deleteSlideFromPresentation(presentation: Presentation, slideId: string): Presentation {
+function deleteSlidesFromPresentation(presentation: Presentation, slideIds: string): Presentation {
+    const newSlideCollection: SlideCollection = {
+        collection: presentation.slideCollection.collection.filter((slide: Slide) => !slideIds.includes(slide.id))
+    }
+
+    const newSelection: Selection = {
+        selectedSlideIds: [],
+        selectedObjectIds: []
+    }
+
+    if (newSlideCollection.collection.length !== 0) {
+        newSelection.selectedSlideIds = [newSlideCollection.collection[0]!!.id]
+    }
+
     return {
         ...presentation,
-        slideCollection: {
-            collection: presentation.slideCollection.collection.filter((slide: Slide) => slide.id !== slideId)
-        }
+        slideCollection: newSlideCollection,
+        selection: newSelection
     }
 }
 

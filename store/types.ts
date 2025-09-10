@@ -8,15 +8,15 @@ export type SlideCollection = {
     collection: Slide[]
 }
 
-type Selection = {
-    selectedIds: string[]
+export type Selection = {
+    selectedSlideIds: string[],
+    selectedObjectIds: string[]
 }
 
 export type Slide = {
     id: string,
     background: Background,
-    objects: SlideObject[],
-    selection: Selection,
+    objects: SlideObject[]
 }
 
 export type Background = SolidBackground | ImageBackground

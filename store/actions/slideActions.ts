@@ -18,20 +18,24 @@ function addObjectToSlide(presentation: Presentation, slideId: string, newObject
     }
 }
 
-function deleteObjectFromSlide(presentation: Presentation, slideId: string, objectId: string): Presentation {
+function deleteSelectedObjectsFromSlide(presentation: Presentation, objectIds: string[]): Presentation {
     return {
         ...presentation,
         slideCollection: {
             collection: presentation.slideCollection.collection.map((slide: Slide) => {
-                if (slide.id === slideId) {
+                if (slide.id === presentation.selection.selectedSlideIds[0]!!) {
                     return {
                         ...slide,
-                        objects: slide.objects.filter((object: SlideObject) => object.id !== objectId)
+                        objects: slide.objects.filter((object: SlideObject) => !objectIds.includes(object.id))
                     }
                 }
 
                 return slide
             })
+        },
+        selection: {
+            ...presentation.selection,
+            selectedObjectIds: []
         }
     }
 }
