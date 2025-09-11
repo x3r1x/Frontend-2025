@@ -1,11 +1,7 @@
 export type Presentation = {
     name: string,
-    slideCollection: SlideCollection,
+    slideCollection: Slide[],
     selection: Selection
-}
-
-export type SlideCollection = {
-    collection: Slide[]
 }
 
 export type Selection = {
@@ -38,13 +34,13 @@ export type Coordinates = {
     y: number
 }
 
-type DefaultObject = {
+type BaseSlideObject = {
     id: string,
     position: Coordinates,
     size: Coordinates
 }
 
-type TextObject = DefaultObject & {
+type TextObject = BaseSlideObject & {
     text: string,
     fontFamily: string,
     fontSize: number,
@@ -52,7 +48,7 @@ type TextObject = DefaultObject & {
     type: "Text"
 }
 
-type ImageObject = DefaultObject & {
+type ImageObject = BaseSlideObject & {
     src: string,
     type: "Image"
 }

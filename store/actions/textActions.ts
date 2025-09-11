@@ -3,8 +3,7 @@ import { Presentation, Slide, SlideObject } from "../types.js";
 function changeText(presentation: Presentation, slideId: string, textId: string, newText: string): Presentation {
     return {
         ...presentation,
-        slideCollection: {
-            collection: presentation.slideCollection.collection.map((slide: Slide) => {
+        slideCollection: presentation.slideCollection.map((slide: Slide) => {
                 if (slide.id === slideId) {
                     return {
                         ...slide,
@@ -23,15 +22,13 @@ function changeText(presentation: Presentation, slideId: string, textId: string,
 
                 return slide
             })
-        }
     }
 }
 
 function changeFontSize(presentation: Presentation, slideId: string, textId: string, newFontSize: number): Presentation {
     return {
         ...presentation,
-        slideCollection: {
-            collection: presentation.slideCollection.collection.map((slide: Slide) => {
+        slideCollection: presentation.slideCollection.map((slide: Slide) => {
                 if (slide.id === slideId) {
                     return {
                         ...slide,
@@ -50,15 +47,13 @@ function changeFontSize(presentation: Presentation, slideId: string, textId: str
 
                 return slide
             })
-        }
     }
 }
 
 function changeFontFamily(presentation: Presentation, slideId: string, textId: string, newFontFamily: string): Presentation {
     return {
         ...presentation,
-        slideCollection: {
-            collection: presentation.slideCollection.collection.map((slide: Slide) => {
+        slideCollection: presentation.slideCollection.map((slide: Slide) => {
                 if (slide.id === slideId) {
                     return {
                         ...slide,
@@ -77,6 +72,5 @@ function changeFontFamily(presentation: Presentation, slideId: string, textId: s
 
                 return slide
             })
-        }
     }
 }

@@ -10,6 +10,16 @@ function addSlideToSelection(presentation: Presentation, slideId: string): Prese
     }
 }
 
+function selectSlide(presentation: Presentation, slideId: string): Presentation {
+    return {
+        ...presentation,
+        selection: {
+            selectedSlideIds: [slideId],
+            selectedObjectIds: []
+        }
+    }
+}
+
 function addObjectToSelection(presentation: Presentation, objectId: string): Presentation {
     return {
         ...presentation,

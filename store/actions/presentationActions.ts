@@ -1,4 +1,4 @@
-import { Presentation, Selection, Slide, SlideCollection } from "../types.js"
+import { Presentation, Selection, Slide } from "../types.js"
 
 function renamePresentation(presentation: Presentation, newName: string): Presentation {
     return {
@@ -10,24 +10,20 @@ function renamePresentation(presentation: Presentation, newName: string): Presen
 function addSlideToPresentation(presentation: Presentation, slide: Slide): Presentation {
     return {
         ...presentation, 
-        slideCollection: {
-            collection: [...presentation.slideCollection.collection, slide]
-        }
+        slideCollection: [...presentation.slideCollection, slide]
     }
 }
 
 function deleteSlidesFromPresentation(presentation: Presentation, slideIds: string): Presentation {
-    const newSlideCollection: SlideCollection = {
-        collection: presentation.slideCollection.collection.filter((slide: Slide) => !slideIds.includes(slide.id))
-    }
+    const newSlideCollection: Slide[] = presentation.slideCollection.filter((slide: Slide) => !slideIds.includes(slide.id))
 
     const newSelection: Selection = {
         selectedSlideIds: [],
         selectedObjectIds: []
     }
 
-    if (newSlideCollection.collection.length !== 0) {
-        newSelection.selectedSlideIds = [newSlideCollection.collection[0]!!.id]
+    if (newSlideCollection.length !== 0) {
+        newSelection.selectedSlideIds = [newSlideCollection[0]!!.id]
     }
 
     return {
@@ -40,14 +36,14 @@ function deleteSlidesFromPresentation(presentation: Presentation, slideIds: stri
 function changeSlidesOrder(presentation: Presentation, newOrderIds: string[]): Presentation {
     return {
         ...presentation,
-        slideCollection: newOrderIds.reduce((newSlidesOrder: SlideCollection, id: string) => {
-            const slide = presentation.slideCollection.collection.find((slide: Slide) => slide.id === id)
+        slideCollection: newOrderIds.reduce((newSlidesOrder: Slide[], id: string) => {
+            const slide = presentation.slideCollection.find((slide: Slide) => slide.id === id)
 
             if (slide !== undefined) {
-                newSlidesOrder.collection.push(slide)
+                newSlidesOrder.push(slide)
             }
             
             return newSlidesOrder
-        }, {collection: []})
+        }, [])
     }
 }

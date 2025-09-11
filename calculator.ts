@@ -182,4 +182,7 @@ function calc(expression: string): void {
     }
 }
 
+calc('+ 3 4')
+calc("* (- 5 6) 7")
+calc('+ 1.5 4.5')
 calc('- * / 15 - 7 + 1 1 (* (- 8 7) (/ (* 3 5) 5)) + 2 + (* -1 -1) 1')

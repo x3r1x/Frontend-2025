@@ -3,8 +3,7 @@ import { Coordinates, Presentation, Slide, SlideObject } from "../types.js";
 function changeObjectPosition(presentation: Presentation, slideId: string, objectId: string, newPosition: Coordinates): Presentation {
     return {
         ...presentation,
-        slideCollection: {
-            collection: presentation.slideCollection.collection.map((slide: Slide) => {
+        slideCollection: presentation.slideCollection.map((slide: Slide) => {
                 if (slide.id === slideId) {
                     return {
                         ...slide,
@@ -23,15 +22,13 @@ function changeObjectPosition(presentation: Presentation, slideId: string, objec
 
                 return slide
             })
-        }
     }
 }
 
 function changeObjectSize(presentation: Presentation, slideId: string, objectId: string, newSize: Coordinates): Presentation {
     return {
         ...presentation,
-        slideCollection: {
-            collection: presentation.slideCollection.collection.map((slide: Slide) => {
+        slideCollection: presentation.slideCollection.map((slide: Slide) => {
                 if (slide.id === slideId) {
                     return {
                         ...slide,
@@ -50,6 +47,5 @@ function changeObjectSize(presentation: Presentation, slideId: string, objectId:
 
                 return slide
             })
-        }
     }
 }

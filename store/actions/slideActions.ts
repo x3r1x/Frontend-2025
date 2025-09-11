@@ -3,8 +3,7 @@ import { Background, Presentation, Slide, SlideObject } from "../types.js";
 function addObjectToSlide(presentation: Presentation, slideId: string, newObject: SlideObject): Presentation {
     return {
         ...presentation,
-        slideCollection: {
-            collection: presentation.slideCollection.collection.map((slide: Slide) => {
+        slideCollection: presentation.slideCollection.map((slide: Slide) => {
                 if (slide.id === slideId) {
                     return {
                         ...slide,
@@ -14,15 +13,13 @@ function addObjectToSlide(presentation: Presentation, slideId: string, newObject
 
                 return slide
             })
-        }
     }
 }
 
 function deleteSelectedObjectsFromSlide(presentation: Presentation, objectIds: string[]): Presentation {
     return {
         ...presentation,
-        slideCollection: {
-            collection: presentation.slideCollection.collection.map((slide: Slide) => {
+        slideCollection: presentation.slideCollection.map((slide: Slide) => {
                 if (slide.id === presentation.selection.selectedSlideIds[0]!!) {
                     return {
                         ...slide,
@@ -31,8 +28,7 @@ function deleteSelectedObjectsFromSlide(presentation: Presentation, objectIds: s
                 }
 
                 return slide
-            })
-        },
+            }),
         selection: {
             ...presentation.selection,
             selectedObjectIds: []
@@ -43,8 +39,7 @@ function deleteSelectedObjectsFromSlide(presentation: Presentation, objectIds: s
 function changeSlideBackground(presentation: Presentation, slideId: string, newBackground: Background): Presentation {
     return {
         ...presentation,
-        slideCollection: {
-            collection: presentation.slideCollection.collection.map((slide: Slide) => {
+        slideCollection: presentation.slideCollection.map((slide: Slide) => {
                 if (slide.id === slideId) {
                     return {
                         ...slide,
@@ -54,6 +49,5 @@ function changeSlideBackground(presentation: Presentation, slideId: string, newB
 
                 return slide
             })
-        }
     }
 }
