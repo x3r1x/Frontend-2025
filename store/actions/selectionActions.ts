@@ -24,8 +24,14 @@ function addObjectToSelection(presentation: Presentation, objectId: string): Pre
     return {
         ...presentation,
         selection: {
-            selectedSlideIds: [presentation.selection.selectedSlideIds[0]!!],
+            selectedSlideIds: [presentation.selection.selectedSlideIds[0]!],
             selectedObjectIds: [...presentation.selection.selectedObjectIds, objectId]
         }
     }
+}
+
+export {
+    addSlideToSelection,
+    selectSlide,
+    addObjectToSelection
 }

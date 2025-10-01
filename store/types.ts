@@ -1,15 +1,15 @@
-export type Presentation = {
+export interface Presentation {
     name: string,
     slideCollection: Slide[],
     selection: Selection
 }
 
-export type Selection = {
+export interface Selection {
     selectedSlideIds: string[],
     selectedObjectIds: string[]
 }
 
-export type Slide = {
+export interface Slide {
     id: string,
     background: Background,
     objects: SlideObject[]
@@ -17,30 +17,30 @@ export type Slide = {
 
 export type Background = SolidBackground | ImageBackground
 
-type SolidBackground = {
+export interface SolidBackground {
     color: string,
     type: "Solid"
 }
 
-type ImageBackground = {
+export interface ImageBackground {
     src: string,
     type: "Image"
 }
 
 export type SlideObject = TextObject | ImageObject
 
-export type Coordinates = {
+export interface Coordinates {
     x: number,
     y: number
 }
 
-type BaseSlideObject = {
+interface BaseSlideObject {
     id: string,
     position: Coordinates,
     size: Coordinates
 }
 
-type TextObject = BaseSlideObject & {
+export type TextObject = BaseSlideObject & {
     text: string,
     fontFamily: string,
     fontSize: number,
@@ -48,7 +48,7 @@ type TextObject = BaseSlideObject & {
     type: "Text"
 }
 
-type ImageObject = BaseSlideObject & {
+export type ImageObject = BaseSlideObject & {
     src: string,
     type: "Image"
 }

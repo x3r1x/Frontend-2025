@@ -14,7 +14,7 @@ function addSlideToPresentation(presentation: Presentation, slide: Slide): Prese
     }
 }
 
-function deleteSlidesFromPresentation(presentation: Presentation, slideIds: string): Presentation {
+function deleteSlidesFromPresentation(presentation: Presentation, slideIds: string[]): Presentation {
     const newSlideCollection: Slide[] = presentation.slideCollection.filter((slide: Slide) => !slideIds.includes(slide.id))
 
     const newSelection: Selection = {
@@ -23,7 +23,7 @@ function deleteSlidesFromPresentation(presentation: Presentation, slideIds: stri
     }
 
     if (newSlideCollection.length !== 0) {
-        newSelection.selectedSlideIds = [newSlideCollection[0]!!.id]
+        newSelection.selectedSlideIds = [newSlideCollection[0]!.id]
     }
 
     return {
@@ -46,4 +46,11 @@ function changeSlidesOrder(presentation: Presentation, newOrderIds: string[]): P
             return newSlidesOrder
         }, [])
     }
+}
+
+export {
+    renamePresentation,
+    addSlideToPresentation,
+    deleteSlidesFromPresentation,
+    changeSlidesOrder
 }

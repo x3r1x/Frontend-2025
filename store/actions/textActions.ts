@@ -74,3 +74,9 @@ function changeFontFamily(presentation: Presentation, slideId: string, textId: s
             })
     }
 }
+
+export {
+    changeText,
+    changeFontSize,
+    changeFontFamily
+}

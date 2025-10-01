@@ -16,11 +16,11 @@ function addObjectToSlide(presentation: Presentation, slideId: string, newObject
     }
 }
 
-function deleteSelectedObjectsFromSlide(presentation: Presentation, objectIds: string[]): Presentation {
+function deleteSelectedObjectsFromSlide(presentation: Presentation, slideId: string, objectIds: string[]): Presentation {
     return {
         ...presentation,
         slideCollection: presentation.slideCollection.map((slide: Slide) => {
-                if (slide.id === presentation.selection.selectedSlideIds[0]!!) {
+                if (slide.id === slideId) {
                     return {
                         ...slide,
                         objects: slide.objects.filter((object: SlideObject) => !objectIds.includes(object.id))
@@ -50,4 +50,10 @@ function changeSlideBackground(presentation: Presentation, slideId: string, newB
                 return slide
             })
     }
+}
+
+export {
+    addObjectToSlide,
+    deleteSelectedObjectsFromSlide,
+    changeSlideBackground
 }

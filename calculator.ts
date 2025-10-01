@@ -1,17 +1,17 @@
-const space: string = ' '
+const space = ' '
 const operations: string[] = ['+', '-', '*', '/']
-const openBracket: string = '('
-const closeBracket: string = ')'
+const openBracket = '('
+const closeBracket = ')'
 
 function calc(expression: string): void {
-    let operands: string[] = splitWithoutBrackets(expression)
+    const operands: string[] = splitWithoutBrackets(expression)
 
     if (operands.length === 0) {
         console.log('Wrong expression!')
         return
     }
 
-    let answer = handleOperands(operands)
+    const answer = handleOperands(operands)
 
     if (operands.length === 0 || typeof(answer) === 'string') {
         console.log(answer)
@@ -22,29 +22,29 @@ function calc(expression: string): void {
 
     function handleOperands(operandsList: string[]): number | string {
         if (operandsList.length === 1) {
-            if (operandsList[0]!!.includes('Error')) {
-                return operandsList[0]!!
+            if (operandsList[0]!.includes('Error')) {
+                return operandsList[0]!
             } else {
                 return 'Invalid expression!'
             }
         }
-        const operation: string = operandsList[0]!!
+        const operation: string = operandsList[0]!
 
         operandsList.splice(0, 1)
 
         let operandOne: number | string = ""
         if (operandsList.length === 1) {
             return 'Invalid expression!'
-        } else if (operations.includes(operandsList[0]!!)) {
+        } else if (operations.includes(operandsList[0]!)) {
             operandOne = handleOperands(operandsList)
 
             if (typeof(operandOne) === 'string') {
                 return operandOne
             }
-        } else if (operandsList[0]!!.substring(0, 1) === '(') {
-            const thisExpression: string = operandsList[0]!!.substring(1, operandsList[0]!!.length - 1)
+        } else if (operandsList[0]!.substring(0, 1) === '(') {
+            const thisExpression: string = operandsList[0]!.substring(1, operandsList[0]!.length - 1)
 
-            let newOperands: string[] = splitWithoutBrackets(thisExpression)
+            const newOperands: string[] = splitWithoutBrackets(thisExpression)
             operandOne = handleOperands(newOperands)
 
             if (typeof(operandOne) === 'string') {
@@ -52,24 +52,24 @@ function calc(expression: string): void {
             }
 
             operandsList.splice(0, 1)
-        } else if (!isNumeric(operandsList[0]!!)) {
+        } else if (!isNumeric(operandsList[0]!)) {
             return "Invalid expression!"
         } else {
-            operandOne = Number(operandsList[0]!!)
+            operandOne = Number(operandsList[0]!)
             operandsList.splice(0, 1)
         }
 
         let operandTwo: number | string = ""
-        if (operations.includes(operandsList[0]!!)) {
+        if (operations.includes(operandsList[0]!)) {
             operandTwo = handleOperands(operandsList)
 
             if (typeof(operandTwo) === "string") {
                 return operandTwo
             }
-        } else if (operandsList[0]!!.substring(0, 1) === "(") {
-            const thisExpression = operandsList[0]!!.substring(1, operandsList[0]!!.length - 1)
+        } else if (operandsList[0]!.substring(0, 1) === "(") {
+            const thisExpression = operandsList[0]!.substring(1, operandsList[0]!.length - 1)
 
-            let newOperands: string[] = splitWithoutBrackets(thisExpression)
+            const newOperands: string[] = splitWithoutBrackets(thisExpression)
             operandTwo = handleOperands(newOperands)
 
             if (typeof(operandTwo) === 'string') {
@@ -77,10 +77,10 @@ function calc(expression: string): void {
             }
 
             operandsList.splice(0, 1)
-        } else if (!isNumeric(operandsList[0]!!)) {
+        } else if (!isNumeric(operandsList[0]!)) {
             return 'Invalid expression!'
         } else {
-            operandTwo = Number(operandsList[0]!!)
+            operandTwo = Number(operandsList[0]!)
             operandsList.splice(0, 1)
         }
         
@@ -102,22 +102,22 @@ function calc(expression: string): void {
 
     function splitWithoutBrackets(expression: string): string[] {
         let listOfExpressions: string[] = []
-        let activeBrackets: number = 0
-        let bracketExpression: string = ''
+        let activeBrackets = 0
+        let bracketExpression = ''
 
-        for (let i: number = 0; i < expression.length; i++) {
+        for (let i = 0; i < expression.length; i++) {
             if (activeBrackets === 0) {
-                if (expression[i]!! !== space) {
-                    if (operations.includes(expression[i]!!) && i !== expression.length - 1 && (expression[i + 1]!! === space
-                        || expression[i + 1]!! === openBracket)) {
+                if (expression[i]! !== space) {
+                    if (operations.includes(expression[i]!) && i !== expression.length - 1 && (expression[i + 1]! === space
+                        || expression[i + 1]! === openBracket)) {
                         listOfExpressions = [
                             ...listOfExpressions,
-                            expression[i]!!
+                            expression[i]!
                         ]
-                    } else if (expression[i]!! === openBracket) {
+                    } else if (expression[i]! === openBracket) {
                         activeBrackets += 1
                         bracketExpression += expression[i]
-                    } else if (expression[i]!! == closeBracket) {
+                    } else if (expression[i]! == closeBracket) {
                         return ['Error: wrong placed brackets!']
                     } else {
                         const num: string = expression.substring(i, returnMinIndex(i))
@@ -135,12 +135,12 @@ function calc(expression: string): void {
                     }
                 }
             } else {
-                bracketExpression += expression[i]!!
+                bracketExpression += expression[i]!
 
-                if (expression[i]!! === openBracket) {
+                if (expression[i]! === openBracket) {
                     activeBrackets += 1
                 }
-                if (expression[i]!! === closeBracket) {
+                if (expression[i]! === closeBracket) {
                     activeBrackets -= 1
                 }
                 if (activeBrackets === 0) {

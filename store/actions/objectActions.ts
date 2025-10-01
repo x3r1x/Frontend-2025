@@ -49,3 +49,8 @@ function changeObjectSize(presentation: Presentation, slideId: string, objectId:
             })
     }
 }
+
+export {
+    changeObjectPosition,
+    changeObjectSize
+}
