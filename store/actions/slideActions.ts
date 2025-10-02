@@ -1,59 +1,73 @@
 import { Background, Presentation, Slide, SlideObject } from "../types.js";
 
-function addObjectToSlide(presentation: Presentation, slideId: string, newObject: SlideObject): Presentation {
-    return {
-        ...presentation,
-        slideCollection: presentation.slideCollection.map((slide: Slide) => {
-                if (slide.id === slideId) {
-                    return {
-                        ...slide,
-                        objects: [...slide.objects, newObject]
-                    }
-                }
+function addObjectToSlide(
+  presentation: Presentation,
+  slideId: string,
+  newObject: SlideObject,
+): Presentation {
+  return {
+    ...presentation,
+    slideCollection: presentation.slideCollection.map((slide: Slide) => {
+      if (slide.id === slideId) {
+        return {
+          ...slide,
+          objects: [...slide.objects, newObject],
+        };
+      }
 
-                return slide
-            })
-    }
+      return slide;
+    }),
+  };
 }
 
-function deleteSelectedObjectsFromSlide(presentation: Presentation, slideId: string, objectIds: string[]): Presentation {
-    return {
-        ...presentation,
-        slideCollection: presentation.slideCollection.map((slide: Slide) => {
-                if (slide.id === slideId) {
-                    return {
-                        ...slide,
-                        objects: slide.objects.filter((object: SlideObject) => !objectIds.includes(object.id))
-                    }
-                }
+function deleteSelectedObjectsFromSlide(
+  presentation: Presentation,
+  slideId: string,
+  objectIds: string[],
+): Presentation {
+  return {
+    ...presentation,
+    slideCollection: presentation.slideCollection.map((slide: Slide) => {
+      if (slide.id === slideId) {
+        return {
+          ...slide,
+          objects: slide.objects.filter(
+            (object: SlideObject) => !objectIds.includes(object.id),
+          ),
+        };
+      }
 
-                return slide
-            }),
-        selection: {
-            ...presentation.selection,
-            selectedObjectIds: []
-        }
-    }
+      return slide;
+    }),
+    selection: {
+      ...presentation.selection,
+      selectedObjectIds: [],
+    },
+  };
 }
 
-function changeSlideBackground(presentation: Presentation, slideId: string, newBackground: Background): Presentation {
-    return {
-        ...presentation,
-        slideCollection: presentation.slideCollection.map((slide: Slide) => {
-                if (slide.id === slideId) {
-                    return {
-                        ...slide,
-                        background: newBackground
-                    }
-                }
+function changeSlideBackground(
+  presentation: Presentation,
+  slideId: string,
+  newBackground: Background,
+): Presentation {
+  return {
+    ...presentation,
+    slideCollection: presentation.slideCollection.map((slide: Slide) => {
+      if (slide.id === slideId) {
+        return {
+          ...slide,
+          background: newBackground,
+        };
+      }
 
-                return slide
-            })
-    }
+      return slide;
+    }),
+  };
 }
 
 export {
-    addObjectToSlide,
-    deleteSelectedObjectsFromSlide,
-    changeSlideBackground
-}
+  addObjectToSlide,
+  deleteSelectedObjectsFromSlide,
+  changeSlideBackground,
+};

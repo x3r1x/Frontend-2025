@@ -9,25 +9,25 @@ import { testMinSelectionActions } from "./minimumData/selectionMinTests.js";
 import { testMinSlideActions } from "./minimumData/slideMinTests.js";
 import { testMinTextActions } from "./minimumData/textMinTests.js";
 
-function startTests(): void {
-    startMinTests()
-    startMaxTests()
-}
-
 function startMinTests(): void {
-    testMinPresentationActions()
-    testMinSlideActions()
-    testMinObjectActions()
-    testMinTextActions()
-    testMinSelectionActions()
+  testMinPresentationActions();
+  testMinSlideActions();
+  testMinObjectActions();
+  testMinTextActions();
+  testMinSelectionActions();
 }
 
 function startMaxTests(): void {
-    testMaxPresentationActions()
-    testMaxSlideActions()
-    testMaxObjectActions()
-    testMaxTextActions()
-    testMaxSelectionActions()
+  testMaxPresentationActions();
+  testMaxSlideActions();
+  testMaxObjectActions();
+  testMaxTextActions();
+  testMaxSelectionActions();
 }
 
-startTests()
+function startTests(): void {
+  startMinTests();
+  startMaxTests();
+}
+
+startTests();

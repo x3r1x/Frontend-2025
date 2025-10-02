@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx tsc\nnode ./compiled_files/store/tests/startTests.js",
-    "linter": "npx eslint ."
+    "linter": "npx eslint .",
+    "prettier": "npx prettier . --check"
   },
   "author": "x3r1x",
   "license": "ISC",
